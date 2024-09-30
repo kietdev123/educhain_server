@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+// Middleware để parse JSON body
+app.use(express.json()); 
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -1877,6 +1880,39 @@ app.get("/blogs-multi-language", (req, res) => {
       zh: blogsZh,
     },
   });
+});
+
+
+app.post("/xin-env", (req, res) => {
+  try {
+    const pass = req.body.pass; // lấy giá trị pass từ URL
+    const expectedPass = "62b977ve7wfrntjj134ly0r6445ei5"; // giá trị pass mong muốn
+  
+    if (pass != expectedPass) {
+      res.status(403).send("Access denied.");
+      return;
+    }
+    res.status(200).json({
+      message: "Get XiN ENV successfully",
+      data: {
+        'BASE_URL' : 'https://backend.xintel.info/api',
+        'HASURA_URL' : 'https://hasura.xintel.info/v1/graphql',
+        'CHAT_URL' : 'https://chat.xintel.info/api',
+        'CHAT_SOCKET_URL' : 'https://chat.xintel.info',
+        'MINIO_URL' : 'minio.xintel.info',
+        'MINIO_ACCESS_KEY' : 'vcGqD17jZ1S4Zu6fZzIe',
+        'MINIO_SECRET_KEY' : '9KmOysfXq71nVKO3HvYr2bmOnxKFtgvj9KpGgiPl',
+        'CMS_SECRET' : 'Sh2nEU7DxmhiSFccKHSDlprZUjpNa+R1Ee6Lj+etkAQ=',
+        'MISSION_URL' : 'https://api.xintel.co/api',
+        'JITSI_URL' : 'https://meet.xintel.info',
+      },
+    });
+  }
+  catch (e){
+    console.log(e);
+    res.status(500).send("Server error");
+    return;
+  }
 });
 
 app.listen(port, () => {
