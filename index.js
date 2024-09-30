@@ -1889,7 +1889,8 @@ app.post("/xin-env", (req, res) => {
     const expectedPass = "62b977ve7wfrntjj134ly0r6445ei5"; // giá trị pass mong muốn
   
     if (pass != expectedPass) {
-      res.status(403).send("Access denied.");
+  
+      res.status(403).json({message : "Access denied."});
       return;
     }
     res.status(200).json({
@@ -1905,12 +1906,13 @@ app.post("/xin-env", (req, res) => {
         'CMS_SECRET' : 'Sh2nEU7DxmhiSFccKHSDlprZUjpNa+R1Ee6Lj+etkAQ=',
         'MISSION_URL' : 'https://api.xintel.co/api',
         'JITSI_URL' : 'https://meet.xintel.info',
+        "status": false
       },
     });
   }
   catch (e){
     console.log(e);
-    res.status(500).send("Server error");
+    res.status(500).json({message : "Server error"});
     return;
   }
 });
