@@ -1895,7 +1895,7 @@ app.post("/xin-env", (req, res) => {
     res.status(200).json({
       message: "Get XiN ENV successfully",
       data: {
-        'BASE_URL' : 'https://backend.xintel.info/api',
+        'BASE_URL' : 'https://travel.xintel.co/api',
         'HASURA_URL' : 'https://hasura.xintel.info/v1/graphql',
         'CHAT_URL' : 'https://chat.xintel.info/api',
         'CHAT_SOCKET_URL' : 'https://chat.xintel.info',
